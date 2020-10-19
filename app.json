@@ -1,0 +1,12 @@
+{
+  "name": "sinforme",
+  "displayName": "sinforme",
+  "expo": {
+    "name": "sinforme",
+    "slug": "sinforme",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
