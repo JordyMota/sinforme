@@ -3,7 +3,7 @@ import { Text, View, useWindowDimensions, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import { Container, TopContainer, MiddleContainer, Title, Descript } from './styles';
-import ButtonFull from '../../components/button';
+import ButtonFull from '../../components/Button';
 
 export default function Login({ navigation, route }) {
     const { width, height } = useWindowDimensions();
