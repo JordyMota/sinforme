@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, useWindowDimensions } from 'react-native';
 import { MainInfoButton, MainInfoArt } from './styles';
 
-export default function SplashScreen(props) {
+export default function InfoButton(props) {
     const { width, height } = useWindowDimensions();
     const {
         customStyle={},

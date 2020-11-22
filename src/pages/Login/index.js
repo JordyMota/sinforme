@@ -42,6 +42,14 @@ export default function Login({ navigation, route }) {
                 width: (width / 100) * 90,
                 marginTop: ((height / 100) * 10) * (-1),
                 minHeight: (height / 100) * 16,
+                shadowColor: '#000000',
+                shadowOffset: {
+                    width: 0,
+                    height: 0
+                },
+                shadowOpacity: 0.7,
+                shadowRadius: .2,
+                elevation: 4,
             }}>
                 <Title>
                     Bem vindo

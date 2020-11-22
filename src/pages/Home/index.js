@@ -6,9 +6,9 @@ import {
     Container, TopContainer, ScrollContainer, MainView,
     TopHeader, LightButton, ButtonIcon, FullSearchButton,
     FullSearchArt, FullSearchIcon, MainInfoTitle, MainInfoList,
-    MainInfoButton, MainInfoArt
 } from './styles';
 import InfoButton from '../../components/InfoButton';
+import Constants from "expo-constants";
 
 const logoWhite = require('../../assets/sinforme_icon_white.png');
 const iconHelp = require('../../assets/help.png');
@@ -78,10 +78,10 @@ export default function Home({ navigation, route }) {
 
     return (
         <Container>
-            <TopContainer style={{ height: (height / 100) * 38 }}>
+            <TopContainer style={{ height: ((height / 100) * 38) + (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) }}>
             </TopContainer>
             <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true}>
-                <MainView>
+                <MainView style={{ marginTop: Constants?.statusBarHeight ? Constants.statusBarHeight : 14 }} >
                     <TopHeader>
                         <Image
                             source={logoWhite}
@@ -107,7 +107,7 @@ export default function Home({ navigation, route }) {
                                 source={iconHelp}
                             />
                         </LightButton>
-                        <LightButton lastItem={true}>
+                        <LightButton lastItem={true} onPress={changeLog}>
                             <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
                                 Informações do App
                             </Text>
@@ -118,7 +118,7 @@ export default function Home({ navigation, route }) {
                         </LightButton>
                     </View>
                     <FullSearchButton
-                        onPress={navigation.navigate('Search', {})}
+                        onPress={()=>navigation.navigate('Search', {})}
                         style={{
                             shadowColor: '#000000',
                             shadowOffset: {
@@ -169,10 +169,10 @@ export default function Home({ navigation, route }) {
                                 />
                             ))
                         }
-                        </MainInfoList>
+                    </MainInfoList>
                 </MainView>
             </ScrollContainer>
-            {/* <StatusBar style="auto" /> */}
+            <StatusBar style="auto" />
         </Container>
     );
 }

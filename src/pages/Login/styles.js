@@ -19,11 +19,6 @@ export const MiddleContainer = styled.View`
     padding: 20px;
     background-color: #fff;
     border-radius: 24px;
-    shadow-color: #000;
-    shadow-offset: {width: 3, height: 3};
-    shadow-opacity: 0.4;
-    shadow-radius: 2;
-    elevation: 1;
     align-items: center;
 `;
 
