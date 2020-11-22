@@ -5,13 +5,38 @@ import { StatusBar } from 'expo-status-bar';
 import {
     Container, TopContainer, ScrollContainer, MainView,
     TopHeader, LightButton, ButtonIcon, FullSearchButton,
-    FullSearchArt, FullSearchIcon
+    FullSearchArt, FullSearchIcon, MainInfoTitle, MainInfoList,
+    MainInfoButton, MainInfoArt
 } from './styles';
+import InfoButton from '../../components/InfoButton';
 
 const logoWhite = require('../../assets/sinforme_icon_white.png');
 const iconHelp = require('../../assets/help.png');
 const iconInfoApp = require('../../assets/app_info.png');
 const iconSearch = require('../../assets/search_alt.png');
+
+const mainInfos = [
+    {
+        id: '_a1',
+        title: 'Fazer transferência',
+        description: 'Clique aqui para saber mais sobre transferências de dinheiro online'
+    },
+    {
+        id: '_a2',
+        title: 'Apagar foto facebook',
+        description: 'Clique aqui para saber mais sobre apagar publicações do facebook'
+    },
+    {
+        id: '_a3',
+        title: 'Assistir Novelas Antigas',
+        description: 'Clique aqui para saber mais sobre como assistir novelas antigas'
+    },
+    {
+        id: '_a4',
+        title: 'Baixar anti virus',
+        description: 'Clique aqui para saber mais sobre como baixar anti virus'
+    },
+]; 
 
 export default function Home({ navigation, route }) {
     const { width, height } = useWindowDimensions();
@@ -92,7 +117,19 @@ export default function Home({ navigation, route }) {
                             />
                         </LightButton>
                     </View>
-                    <FullSearchButton>
+                    <FullSearchButton
+                        onPress={navigation.navigate('Search', {})}
+                        style={{
+                            shadowColor: '#000000',
+                            shadowOffset: {
+                                width: 0,
+                                height: 0
+                            },
+                            shadowOpacity: 0.7,
+                            shadowRadius: .2,
+                            elevation: 4
+                        }}
+                    >
                         <View>
                             <Text style={{ fontSize: 22, color: '#000', fontWeight: 'bold', }} >
                                 Buscar informações 
@@ -117,6 +154,22 @@ export default function Home({ navigation, route }) {
                             source={iconSearch}
                         />
                     </FullSearchButton>
+                    <MainInfoTitle>
+                        Informações populares
+                    </MainInfoTitle>
+                    <MainInfoList>
+                        {
+                            mainInfos.map((item, index) => (
+                                <InfoButton
+                                    key={item.id + index}
+                                    keyItem={item.id + index}
+                                    even={index%2 === 0}
+                                    title={item.title}
+                                    description={item.description}
+                                />
+                            ))
+                        }
+                        </MainInfoList>
                 </MainView>
             </ScrollContainer>
             {/* <StatusBar style="auto" /> */}

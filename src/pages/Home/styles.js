@@ -63,12 +63,8 @@ export const FullSearchButton = styled.TouchableOpacity`
     position: relative;
     margin-top: 28px;
     overflow: hidden;
-    shadow-color: #000;
-    shadow-offset: {width: 3, height: 3};
-    shadow-opacity: 0.4;
-    shadow-radius: 2;
-    elevation: 1;
 `;
+    // box-shadow: 2px 2px 1px rgba(0,0,0,0.25);
 
 export const FullSearchArt = styled.View`
     border-radius: 250;
@@ -80,4 +76,22 @@ export const FullSearchIcon = styled.Image`
     position: absolute;
     top: 10px;
     right: 22px;
+`;
+
+export const MainInfoTitle = styled.Text`
+    width: 100%;
+    font-size: 22;
+    color: #000;
+    margin-top: 30px;
+    font-weight: bold;
+    padding: 0 8px;
+`;
+
+export const MainInfoList = styled.View`
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    margin-bottom: 40px;
+    justify-content: flex-start;
 `;
