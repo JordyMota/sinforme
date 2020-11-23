@@ -99,7 +99,7 @@ export default function Home({ navigation, route }) {
                         </View>
                     </TopHeader>
                     <View style={{ marginTop: 36, flexDirection: 'row' }}>
-                        <LightButton>
+                        <LightButton onPress={()=>navigation.navigate('Help', {})}>
                             <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
                                 Preciso de Ajuda
                             </Text>

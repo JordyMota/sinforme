@@ -8,6 +8,7 @@ import SplashScreen from './pages/SplashScreen';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Search from './pages/Search';
+import Help from './pages/Help';
 
 export default function Main() {
     const Stack = createStackNavigator();
@@ -34,11 +35,13 @@ export default function Main() {
             <Stack.Navigator headerMode={'none'} initialRouteName={firstLogin ? 'Login' : 'Home'}>
                 {
                     firstLogin ? (
+                        <>
                         <Stack.Screen
                             name="Login"
                             component={Login}
                             initialParams={{ login: ()=>setFirstLogin(false) }}
                         />
+                        </>
                     ) : (
                         <>
                         <Stack.Screen
@@ -54,6 +57,10 @@ export default function Main() {
                         </>
                     )
                 }
+                <Stack.Screen
+                    name="Help"
+                    component={Help}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

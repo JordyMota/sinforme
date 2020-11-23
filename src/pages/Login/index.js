@@ -67,7 +67,7 @@ export default function Login({ navigation, route }) {
                 text={'Preciso de ajuda'}
                 customStyle={{ marginTop: 20, width: ((width / 100) * 90) - 40 }}
                 outline={true}
-                onclick={()=>{}}
+                onclick={()=>navigation.navigate('Help', {})}
             />
             <StatusBar style="auto" />
         </Container>
