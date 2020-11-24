@@ -3,9 +3,8 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex: 1;
     position: relative;
-    padding: 0 16px;
     background-color: #fff;
-    margin-bottom: 40px;
+    align-items: center;
 `;
 
 export const Title = styled.Text`
@@ -25,20 +24,30 @@ export const ScrollContainer = styled.ScrollView`
     flex: 1;
 `;
 
-export const ButtonClose = styled.TouchableOpacity`
-    width: 50px;
-    height: 50px;
-    padding: 12px;
-    position: absolute;
-    right: 16px;
-`;
-
 export const FirstArt = styled.View`
     position: absolute;
-    border-radius: 250;
+    border-radius: 70;
     background-color: #FFA62B;
+    transform: rotate(24deg);
 `;
 
 export const SecondtArt = styled(FirstArt)`
     background-color: #75B3E7;
+    transform: rotate(-5deg);
+`;
+
+export const OptionList = styled.View`
+    width: 100%;
+    margin-top: 24px;
+    padding-left: 12px;
+`;
+
+export const OptionItem = styled.TouchableOpacity`
+    width: 100%;
+    padding: 14px 18px 14px 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-color: rgba(0, 0, 0, .2);
+    border-bottom-width: 2px;
 `;

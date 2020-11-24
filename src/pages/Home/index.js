@@ -38,18 +38,10 @@ const mainInfos = [
     },
 ]; 
 
-export default function Home({ navigation, route }) {
+export default function HomeScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
     const [userData, setUserData] = useState(null);
-
-    const storeData = async (val) => {
-        try {
-            await AsyncStorage.setItem('@first_access', val);
-        } catch (e) {
-            // saving error
-        }
-    }
-
+    
     const getInfos = async () => {
         try {
             const userInfo = await AsyncStorage.getItem('@user_info');
@@ -63,16 +55,11 @@ export default function Home({ navigation, route }) {
         }
     }
 
-    const changeLog = () => {
-        storeData(null);
-        if (typeof route?.params?.logout === 'function') route.params.logout();
-    }
-
     useEffect(()=> {
+        navigation.setParams({});
         setUserData({
             name: 'Jordy Mota'
         });
-        navigation.setParams({});
         // getInfos();
     }, []);
 
@@ -99,7 +86,7 @@ export default function Home({ navigation, route }) {
                         </View>
                     </TopHeader>
                     <View style={{ marginTop: 36, flexDirection: 'row' }}>
-                        <LightButton onPress={()=>navigation.navigate('Help', {})}>
+                        <LightButton onPress={()=>navigation.navigate('Help', { from: 'Home' })}>
                             <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
                                 Preciso de Ajuda
                             </Text>
@@ -107,7 +94,7 @@ export default function Home({ navigation, route }) {
                                 source={iconHelp}
                             />
                         </LightButton>
-                        <LightButton lastItem={true} onPress={changeLog}>
+                        <LightButton lastItem={true} onPress={()=>navigation.navigate('AppInfo', { ...route.params })}>
                             <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
                                 Informações do App
                             </Text>

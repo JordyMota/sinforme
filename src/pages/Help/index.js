@@ -1,17 +1,36 @@
 import React from 'react';
-import { Text, View, useWindowDimensions } from 'react-native';
-import { Container, Title, Descript, ScrollContainer } from './styles';
+import { Text, View, useWindowDimensions, Image } from 'react-native';
+import { Container, Title, Descript, ScrollContainer, ButtonClose, FirstArt, SecondtArt } from './styles';
 import { StatusBar } from 'expo-status-bar';
 import Constants from "expo-constants";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-export default function SplashScreen() {
+const closeIcon = require('../../assets/close.png');
+
+export default function HelpScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
+    const { from } = route.params;
     return (
         <View style={{ flex: 1,  backgroundColor: '#fff' }}>
-            <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true}>
-                <Container>
+            <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true} style={{ minHeight: height }}>
+                <Container style={{ minHeight: height }}>
+                    <FirstArt
+                        style={{
+                            width: (width/100)*46,
+                            height: (width/100)*46,
+                            top: ((width/100)*10)*(-1),
+                            left: ((width/100)*22)*(-1)
+                        }}
+                    />
+                    <SecondtArt
+                        style={{
+                            width: (width/100)*90,
+                            height: (width/100)*90,
+                            bottom: ((width/100)*42)*(-1),
+                            right: ((width/100)*38)*(-1)
+                        }}
+                    />
                     <Title style={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 30 }}>
                         Precisa de ajuda?{"\n"}Fale com a gente!
                     </Title>
@@ -45,7 +64,19 @@ export default function SplashScreen() {
                         text={'Cancelar'}
                         outline={true}
                         customStyle={{ marginTop: 24 }}
+                        onclick={()=>navigation.navigate(from, {})}
                     />
+                    <ButtonClose
+                        style={{
+                            top: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10
+                        }}
+                        onPress={()=>navigation.navigate(from, {})}
+                    >
+                        <Image
+                            style={{ width: '100%', height: '100%' }}
+                            source={closeIcon}
+                        />
+                    </ButtonClose>
                 </Container>
             </ScrollContainer>
             <StatusBar style="auto" />

@@ -54,22 +54,9 @@ const infoListFull = [
     },
 ];
 
-export default function Search({ navigation, route }) {
+export default function SearchScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
     const [infoList, setInfoList] = useState([]);
-
-    const storeData = async (val) => {
-        try {
-            await AsyncStorage.setItem('@first_access', val);
-        } catch (e) {
-            // saving error
-        }
-    }
-
-    const changeLog = () => {
-        storeData(null);
-        if (typeof route?.params?.logout === 'function') route.params.logout();
-    }
 
     useEffect(()=> {
         navigation.setParams({});
@@ -96,7 +83,7 @@ export default function Search({ navigation, route }) {
                     </SearchCotainer>
                     <WhiteContent>
                         <MainInfoTitle>
-                            Informações populares
+                            Informações
                         </MainInfoTitle>
                         <MainInfoList>
                             {

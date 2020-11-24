@@ -2,24 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, useWindowDimensions, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { Container, TopContainer, MiddleContainer, Title, Descript } from './styles';
+import {
+    Container, TopContainer, MiddleContainer, Title, Descript, AppVersion,
+    LinkItem, TutorialContainerSmall, TutorialContainerSmallSecond, Overlay,
+    TutorialContainerSmallIcon, TutorialContainerBig, TutorialContainerBigSecond,
+    LinkItemButton, LinksContainer, TextTutorialTitle
+} from './styles';
 import ButtonFull from '../../components/Button';
+let appJson = require('../../../app.json');
+let iconTutorial = require('../../assets/tutorial.png');
 
-export default function Login({ navigation, route }) {
+export default function LoginScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
+    const [showTutorialOption, setShowOption] = useState(true);
+    const [showTutorialChip, setShowChip] = useState(false);
     const brandWhite = require('../../assets/sinforme_logo_white.png');
+
+    const handleNotVisible = async () => {
+        const setTutorialInvisible = await AsyncStorage.getItem('@tutorial_not_visible');
+        if (setTutorialInvisible === 'true') setShowOption(false);
+    }
 
     useEffect(()=> {
         navigation.setParams({});
+        setShowOption(true);
+        setShowChip(false);
+        handleNotVisible();
     }, []);
 
     const storeData = async (val) => {
         try {
             await AsyncStorage.setItem('@first_access', val);
         } catch (e) {
-            // saving error
         }
-    }
+    };
+
+    const hideTutorial = async () => {
+        await AsyncStorage.setItem('@tutorial_not_visible', 'true');
+    };
 
     const changeLog = () => {
         storeData('true');
@@ -67,8 +87,89 @@ export default function Login({ navigation, route }) {
                 text={'Preciso de ajuda'}
                 customStyle={{ marginTop: 20, width: ((width / 100) * 90) - 40 }}
                 outline={true}
-                onclick={()=>navigation.navigate('Help', {})}
+                onclick={()=>navigation.navigate('Help', {from: 'Login'})}
             />
+            {
+                showTutorialOption ? (
+                    <>
+                    <TutorialContainerSmallSecond />
+                    <TutorialContainerSmall onPress={() => {
+                        setShowOption(false);
+                        setShowChip(true);
+                    }}>
+                        <TutorialContainerSmallIcon source={iconTutorial} />
+                    </TutorialContainerSmall>
+                    </>
+                ) : <></>
+            }
+            {
+                showTutorialChip ? (
+                    <>
+                    <Overlay
+                        style={{ width, height }}
+                        onPress={() => {
+                            setShowOption(true);
+                            setShowChip(false);
+                        }}
+                    />
+                    <TutorialContainerBigSecond />
+                    <TutorialContainerBig>
+                        <TextTutorialTitle>
+                            Deseja ver o tutorial novamente?
+                        </TextTutorialTitle>
+                        <LinksContainer>
+                            <LinkItemButton
+                                outline={true}
+                                onPress={() => {
+                                    setShowOption(false);
+                                    setShowChip(false);
+                                }}
+                            >
+                                <LinkItem>
+                                    Ver tutorial
+                                </LinkItem>
+                            </LinkItemButton>
+                        </LinksContainer>
+                        <LinksContainer isRight={true}>
+                            <LinkItemButton
+                                outline={true}
+                                last={true}
+                                onPress={() => {
+                                    setShowOption(true);
+                                    setShowChip(false);
+                                }}
+                            >
+                                <LinkItem>
+                                    Agora não
+                                </LinkItem>
+                            </LinkItemButton>
+                        </LinksContainer>
+                        <LinksContainer isLast={true}>
+                            <LinkItemButton
+                                outline={true}
+                                style={{ marginBottom: 0 }}
+                                onPress={() => {
+                                    setShowOption(false);
+                                    setShowChip(false);
+                                    hideTutorial();
+                                }}
+                            >
+                                <LinkItem>
+                                    Não quero
+                                </LinkItem>
+                            </LinkItemButton>
+                        </LinksContainer>
+                    </TutorialContainerBig>
+                    </>
+                ) : <></>
+            }
+            {
+                appJson?.expo?.version ? (
+                    <AppVersion>
+                        Versão {appJson.expo.version}
+                    </AppVersion>
+                ) : <></>
+            }
             <StatusBar style="auto" />
         </Container>
     );

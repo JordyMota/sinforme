@@ -10,8 +10,8 @@ export default function SplashScreen() {
             <Image
                 source={brandWhite}
                 style={{
-                    width: (width/100)*62,
-                    height: (((width/100)*62)/100)*45.16,
+                    width: (width/100)*40,
+                    height: (((width/100)*40)/100)*45.16,
                 }}
             />
         </Container>

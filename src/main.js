@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,20 +7,16 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Help from './pages/Help';
+import AppInfo from './pages/AppInfo';
 
 export default function Main() {
     const Stack = createStackNavigator();
     const [isLoading, setLoading] = useState(true);
     const [firstLogin, setFirstLogin] = useState(true);
     const getData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('@first_access');
-            setFirstLogin(!value);
-            setLoading(false);
-        } catch(e) {
-            setFirstLogin(true);
-            setLoading(false);
-        }
+        const value = await AsyncStorage.getItem('@first_access');
+        setFirstLogin(!value);
+        setLoading(false);
     }
 
     useEffect(()=> {
@@ -32,7 +26,7 @@ export default function Main() {
     if (isLoading) return <SplashScreen />;
     return (
         <NavigationContainer>
-            <Stack.Navigator headerMode={'none'} initialRouteName={firstLogin ? 'Login' : 'Home'}>
+            <Stack.Navigator headerMode={'none'} initialRouteName={'Login'}>
                 {
                     firstLogin ? (
                         <>
@@ -52,6 +46,11 @@ export default function Main() {
                         <Stack.Screen
                             name="Search"
                             component={Search}
+                            initialParams={{ logout: ()=>setFirstLogin(true) }}
+                        />
+                        <Stack.Screen
+                            name="AppInfo"
+                            component={AppInfo}
                             initialParams={{ logout: ()=>setFirstLogin(true) }}
                         />
                         </>

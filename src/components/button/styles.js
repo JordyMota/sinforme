@@ -8,7 +8,7 @@ export const Container = styled.TouchableOpacity`
     justify-content: center;
     border-radius: 6px;
     background-color: ${(props)=>props.outline ? 'transparent' : '#1B2431'};
-    border: 1px solid #1B2431;
+    border: 2px solid #1B2431;
 `;
 
 export const ButtonText = styled.Text`
