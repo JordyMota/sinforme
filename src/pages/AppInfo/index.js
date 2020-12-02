@@ -35,8 +35,8 @@ export default function AppInfo({ navigation, route }) {
     }, []);
 
     return (
-        <View style={{ flex: 1,  backgroundColor: '#fff' }}>
-            <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true}>
+        <View style={{ flex: 1,  backgroundColor: '#fff', minHeight: height }}>
+            <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true} style={{ minHeight: height }}>
                 <Container style={{ minHeight: height }}>
                     <HeaderDefault
                         onclick={()=>navigation.navigate('Home', {})}

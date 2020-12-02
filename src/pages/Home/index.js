@@ -9,6 +9,7 @@ import {
 } from './styles';
 import InfoButton from '../../components/InfoButton';
 import Constants from "expo-constants";
+import Api from '../../api'; 
 
 const logoWhite = require('../../assets/sinforme_icon_white.png');
 const iconHelp = require('../../assets/help.png');
@@ -43,16 +44,20 @@ export default function HomeScreen({ navigation, route }) {
     const [userData, setUserData] = useState(null);
     
     const getInfos = async () => {
-        try {
-            const userInfo = await AsyncStorage.getItem('@user_info');
-            if (!userInfo) {
-                setUserData(null);
-                return;
-            }
-            setUserData(JSON.parse(userInfo));
-        } catch (e) {
-            // saving error
+        const userId = await AsyncStorage.getItem('@user_id');
+        if (!userId) {
+            setUserData(null);
+            return;
         }
+
+        Api.get('/user'+userId)
+        .then(res => {
+            console.log('teste', res);
+            // setUserData(JSON.parse(userInfo));
+        }).catch(err => {
+            console.log(err, 'erro');
+            setUserData(null);
+        });
     }
 
     useEffect(()=> {
@@ -87,16 +92,46 @@ export default function HomeScreen({ navigation, route }) {
                     </TopHeader>
                     <View style={{ marginTop: 36, flexDirection: 'row' }}>
                         <LightButton onPress={()=>navigation.navigate('Help', { from: 'Home' })}>
-                            <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
-                                Preciso de Ajuda
+                            <Text style={{
+                                fontSize: 20,
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                textAlign: 'left',
+                                width: '100%'
+                            }}>
+                                Preciso de
+                            </Text>
+                            <Text style={{
+                                fontSize: 20,
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                textAlign: 'left',
+                                width: '100%'
+                            }}>
+                                Ajuda
                             </Text>
                             <ButtonIcon
                                 source={iconHelp}
                             />
                         </LightButton>
                         <LightButton lastItem={true} onPress={()=>navigation.navigate('AppInfo', { ...route.params })}>
-                            <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', }} >
-                                Informações do App
+                            <Text style={{
+                                fontSize: 20,
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                textAlign: 'left',
+                                width: '100%'
+                            }}>
+                                Informações
+                            </Text>
+                            <Text style={{
+                                fontSize: 20,
+                                color: '#fff',
+                                fontWeight: 'bold',
+                                textAlign: 'left',
+                                width: '100%'
+                            }}>
+                                do App
                             </Text>
                             <ButtonIcon
                                 lastItem={true}
@@ -153,6 +188,7 @@ export default function HomeScreen({ navigation, route }) {
                                     even={index%2 === 0}
                                     title={item.title}
                                     description={item.description}
+                                    onclick={()=>{}}
                                 />
                             ))
                         }

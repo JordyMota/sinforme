@@ -80,7 +80,7 @@ export default function LoginScreen({ navigation, route }) {
                 <ButtonFull
                     text={'Começar'}
                     customStyle={{ marginTop: 34 }}
-                    onclick={changeLog}
+                    onclick={()=>navigation.navigate('RegisterInfo', {})}
                 />
             </MiddleContainer>
             <ButtonFull

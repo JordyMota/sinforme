@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Help from './pages/Help';
 import AppInfo from './pages/AppInfo';
+import RegisterInfo from './pages/RegisterInfo';
 
 export default function Main() {
     const Stack = createStackNavigator();
@@ -33,6 +34,11 @@ export default function Main() {
                         <Stack.Screen
                             name="Login"
                             component={Login}
+                            initialParams={{ login: ()=>setFirstLogin(false) }}
+                        />
+                        <Stack.Screen
+                            name="RegisterInfo"
+                            component={RegisterInfo}
                             initialParams={{ login: ()=>setFirstLogin(false) }}
                         />
                         </>
