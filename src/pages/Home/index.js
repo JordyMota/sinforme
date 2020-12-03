@@ -49,23 +49,16 @@ export default function HomeScreen({ navigation, route }) {
             setUserData(null);
             return;
         }
-
-        Api.get('/user'+userId)
-        .then(res => {
-            console.log('teste', res);
-            // setUserData(JSON.parse(userInfo));
+        Api.get('/user/'+userId).then(res => {
+            if (res?.data?.name) setUserData({ name: res.data.name });
         }).catch(err => {
-            console.log(err, 'erro');
             setUserData(null);
         });
     }
 
     useEffect(()=> {
         navigation.setParams({});
-        setUserData({
-            name: 'Jordy Mota'
-        });
-        // getInfos();
+        getInfos();
     }, []);
 
     return (

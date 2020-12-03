@@ -30,21 +30,9 @@ export default function LoginScreen({ navigation, route }) {
         handleNotVisible();
     }, []);
 
-    const storeData = async (val) => {
-        try {
-            await AsyncStorage.setItem('@first_access', val);
-        } catch (e) {
-        }
-    };
-
     const hideTutorial = async () => {
         await AsyncStorage.setItem('@tutorial_not_visible', 'true');
     };
-
-    const changeLog = () => {
-        storeData('true');
-        if (typeof route?.params?.login === 'function') route.params.login();
-    }
 
     return (
         <Container>

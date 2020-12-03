@@ -9,6 +9,8 @@ import Search from './pages/Search';
 import Help from './pages/Help';
 import AppInfo from './pages/AppInfo';
 import RegisterInfo from './pages/RegisterInfo';
+import Terms from './pages/Terms';
+import Register from './pages/Register';
 
 export default function Main() {
     const Stack = createStackNavigator();
@@ -41,6 +43,11 @@ export default function Main() {
                             component={RegisterInfo}
                             initialParams={{ login: ()=>setFirstLogin(false) }}
                         />
+                        <Stack.Screen
+                            name="Register"
+                            component={Register}
+                            initialParams={{ login: ()=>setFirstLogin(false) }}
+                        />
                         </>
                     ) : (
                         <>
@@ -65,6 +72,11 @@ export default function Main() {
                 <Stack.Screen
                     name="Help"
                     component={Help}
+                />
+                <Stack.Screen
+                    name="Terms"
+                    component={Terms}
+                    initialParams={{ login: ()=>setFirstLogin(false) }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

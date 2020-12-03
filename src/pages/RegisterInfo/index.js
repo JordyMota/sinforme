@@ -57,7 +57,10 @@ export default function RegisterInfoScreen({ navigation, route }) {
                         }}
                     />
                     <HeaderDefault
-                        onclick={()=>navigation.navigate('Login', {})}
+                        onclick={() => {
+                            navigation.pop();
+                            navigation.navigate('Login', {});
+                        }}
                         text={'Vamos começar'}
                         dark={true}
                         customStyle={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10 }}
@@ -71,12 +74,24 @@ export default function RegisterInfoScreen({ navigation, route }) {
                     <Button
                         text={'Continuar'}
                         customStyle={{ marginTop: ((((width/100)*80)/100)*84.629)-210 }}
+                        onclick={() => {
+                            navigation.pop();
+                            navigation.navigate('Register', {});
+                        }}
+
                     />
                     <Button
                         text={'Continuar sem dados'}
                         outline={true}
                         customStyle={{ marginTop: 24 }}
-                        onclick={()=>navigation.navigate(from, {})}
+                        onclick={() => {
+                            navigation.pop();
+                            navigation.navigate('Terms', {
+                                from: 'RegisterInfo',
+                                origin: 'out',
+                                requireData: false
+                            });
+                        }}
                     />
                 </Container>
             </ScrollContainer>

@@ -70,7 +70,10 @@ export default function HelpScreen({ navigation, route }) {
                         style={{
                             top: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10
                         }}
-                        onPress={()=>navigation.navigate(from, {})}
+                        onPress={()=> {
+                            navigation.pop();
+                            navigation.navigate(from, {});
+                        }}
                     >
                         <Image
                             style={{ width: '100%', height: '100%' }}

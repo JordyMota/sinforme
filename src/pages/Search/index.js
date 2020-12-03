@@ -72,7 +72,10 @@ export default function SearchScreen({ navigation, route }) {
                     marginTop: Constants?.statusBarHeight ? Constants.statusBarHeight : 14
                 }}>
                     <HeaderDefault
-                        onclick={()=>navigation.navigate('Home', {})}
+                        onclick={() => {
+                            navigation.pop();
+                            navigation.navigate('Home', {});
+                        }}
                         text={'Buscar informações'}
                     />
                     <SearchCotainer>

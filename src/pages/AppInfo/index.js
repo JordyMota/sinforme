@@ -23,7 +23,9 @@ export default function AppInfo({ navigation, route }) {
 
     const storeData = async () => {
         await AsyncStorage.removeItem('@first_access');
+        await AsyncStorage.removeItem('@user_id');
         if (typeof route?.params?.logout === 'function') route.params.logout();
+        navigation.navigate('Login', {});
     }
 
     const logoutAction = () => {
@@ -39,7 +41,10 @@ export default function AppInfo({ navigation, route }) {
             <ScrollContainer alwaysBounceVertical={true} scrollEnabled={true} style={{ minHeight: height }}>
                 <Container style={{ minHeight: height }}>
                     <HeaderDefault
-                        onclick={()=>navigation.navigate('Home', {})}
+                        onclick={()=> {
+                            navigation.pop();
+                            navigation.navigate('Home', {});
+                        }}
                         text={'Informações do App'}
                         dark={true}
                         customStyle={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10 }}
@@ -73,7 +78,12 @@ export default function AppInfo({ navigation, route }) {
                         />
                     ) : <></>}
                     <OptionList style={ (height <= 593) ? { marginTop: 10 } : {} }>
-                        <OptionItem onPress={()=>navigation.navigate('Help', { from: 'AppInfo' })}>
+                        <OptionItem
+                            onPress={()=> {
+                                navigation.pop();
+                                navigation.navigate('Help', { from: 'AppInfo' });
+                            }}
+                        >
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Image
                                     source={help}
