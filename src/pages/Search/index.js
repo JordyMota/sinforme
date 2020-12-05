@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, useWindowDimensions, Image, TouchableOpacity } from 'react-native';
+import { Text, View, useWindowDimensions, Image, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -10,58 +10,35 @@ import Constants from "expo-constants";
 import InfoButton from '../../components/InfoButton';
 import HeaderDefault from '../../components/HeaderDefault';
 import SearchBar from '../../components/SearchBar';
-
-const infoListFull = [
-    {
-        id: '_a1',
-        title: 'Fazer transferência',
-        description: 'Clique aqui para saber mais sobre transferências de dinheiro online'
-    },
-    {
-        id: '_a2',
-        title: 'Apagar foto facebook',
-        description: 'Clique aqui para saber mais sobre apagar publicações do facebook'
-    },
-    {
-        id: '_a3',
-        title: 'Assistir Novelas Antigas',
-        description: 'Clique aqui para saber mais sobre como assistir novelas antigas'
-    },
-    {
-        id: '_a4',
-        title: 'Baixar anti virus',
-        description: 'Clique aqui para saber mais sobre como baixar anti virus'
-    },
-    {
-        id: '_a5',
-        title: 'Limpar lixo celular',
-        description: 'Clique aqui para saber mais sobre como limpar o lixo do celular'
-    },
-    {
-        id: '_a6',
-        title: 'Assinar Netflix',
-        description: 'Clique aqui para saber mais sobre como assinar a Netflix'
-    },
-    {
-        id: '_a7',
-        title: 'Salvar fotos na nuvem',
-        description: 'Clique aqui para saber mais sobre como salvar suas fotos na nuvem'
-    },
-    {
-        id: '_a8',
-        title: 'Limpar espaço no Whatsapp',
-        description: 'Clique aqui para saber mais sobre como limpar espaço no seu Whatsapp'
-    },
-];
+import Api from '../../api'; 
 
 export default function SearchScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
     const [infoList, setInfoList] = useState([]);
+    const [isLoading, setLoad] = useState(false);
+    const [searchText, setSearch] = useState('');
+
+    const listData = () => {
+        setLoad(true);
+        Api.get('/infos').then(res => {
+            setLoad(false);
+            if (!res?.data?.length) {
+                setInfoList([]);
+                return;
+            }
+            setInfoList(res.data);
+        }).catch(err => {
+            setLoad(false);
+            setInfoList([]);
+        });
+    }
 
     useEffect(()=> {
         navigation.setParams({});
-        // setInfoList([]);
-        setInfoList(infoListFull);
+        setLoad(false);
+        setInfoList([]);
+        setSearch('');
+        listData();
     }, []);
 
     return (
@@ -82,6 +59,7 @@ export default function SearchScreen({ navigation, route }) {
                         <SearchBar
                             title={'Digite a informação que deseja saber'}
                             placeholder={'Ex.. Fazer transferência'}
+                            onchange={({nativeEvent: {text}}) => setSearch(text)}
                         />
                     </SearchCotainer>
                     <WhiteContent>
@@ -90,15 +68,30 @@ export default function SearchScreen({ navigation, route }) {
                         </MainInfoTitle>
                         <MainInfoList>
                             {
-                                infoList.map((item, index) => (
-                                    <InfoButton
-                                        key={item.id + index}
-                                        keyItem={item.id + index}
-                                        even={index%2 === 0}
-                                        title={item.title}
-                                        description={item.description}
-                                    />
-                                ))
+                                isLoading ? (
+                                    <View style={{ width: '100%', alignItems: 'center', marginTop: 15 }}>
+                                        <ActivityIndicator color="#1B2431" size="large" />
+                                    </View>
+                                ) : (
+                                    infoList.filter(item => (
+                                        searchText.length ? item.title.toLowerCase().search(searchText.toLowerCase()) >= 0 : true
+                                    )).map((item, index) => (
+                                        <InfoButton
+                                            key={item._id + index}
+                                            keyItem={item._id + index}
+                                            even={index%2 === 0}
+                                            title={item.title}
+                                            description={item.shortDescript}
+                                            onclick={()=>{
+                                                navigation.pop();
+                                                navigation.navigate('InfoDetail', {
+                                                    info: item._id,
+                                                    from: 'Search'
+                                                });
+                                            }}
+                                        />
+                                    ))
+                                )
                             }
                         </MainInfoList>
                     </WhiteContent>

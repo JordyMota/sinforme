@@ -25,9 +25,9 @@ export default function LoginScreen({ navigation, route }) {
 
     useEffect(()=> {
         navigation.setParams({});
-        setShowOption(true);
+        setShowOption(false);
         setShowChip(false);
-        handleNotVisible();
+        // handleNotVisible();
     }, []);
 
     const hideTutorial = async () => {

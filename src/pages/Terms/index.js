@@ -41,6 +41,7 @@ export default function TermsScreen({ navigation, route }) {
             Api.post('/user', {
                 ...formParams
             }).then(async res => {
+                setLoad(false);
                 if (!res?.data?._id) {
                     setError(true);
                     setErrorText('Serviço temporariamente indisponivel, tente novamente mais tarde');
@@ -49,6 +50,7 @@ export default function TermsScreen({ navigation, route }) {
                 await AsyncStorage.setItem('@user_id', res.data._id);
                 getIn();
             }).catch(err => {
+                setLoad(false);
                 setError(true);
                 setErrorText('Serviço temporariamente indisponivel, tente novamente mais tarde');
             });
@@ -62,7 +64,7 @@ export default function TermsScreen({ navigation, route }) {
         setError(false);
         setLoad(false);
         setErrorText('');
-    }, [])
+    }, []);
 
     return (
         <View style={{ flex: 1,  backgroundColor: '#fff', maxHeight: height }}>

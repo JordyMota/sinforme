@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, useWindowDimensions, Image } from 'react-native';
+import { Text, View, useWindowDimensions, Image, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -16,32 +16,11 @@ const iconHelp = require('../../assets/help.png');
 const iconInfoApp = require('../../assets/app_info.png');
 const iconSearch = require('../../assets/search_alt.png');
 
-const mainInfos = [
-    {
-        id: '_a1',
-        title: 'Fazer transferência',
-        description: 'Clique aqui para saber mais sobre transferências de dinheiro online'
-    },
-    {
-        id: '_a2',
-        title: 'Apagar foto facebook',
-        description: 'Clique aqui para saber mais sobre apagar publicações do facebook'
-    },
-    {
-        id: '_a3',
-        title: 'Assistir Novelas Antigas',
-        description: 'Clique aqui para saber mais sobre como assistir novelas antigas'
-    },
-    {
-        id: '_a4',
-        title: 'Baixar anti virus',
-        description: 'Clique aqui para saber mais sobre como baixar anti virus'
-    },
-]; 
-
 export default function HomeScreen({ navigation, route }) {
     const { width, height } = useWindowDimensions();
     const [userData, setUserData] = useState(null);
+    const [infoList, setInfoList] = useState([]);
+    const [isLoading, setLoad] = useState(false);
     
     const getInfos = async () => {
         const userId = await AsyncStorage.getItem('@user_id');
@@ -56,9 +35,27 @@ export default function HomeScreen({ navigation, route }) {
         });
     }
 
+    const listData = () => {
+        setLoad(true);
+        Api.get('/infos-priority').then(res => {
+            setLoad(false);
+            if (!res?.data?.length) {
+                setInfoList([]);
+                return;
+            }
+            setInfoList(res.data);
+        }).catch(err => {
+            setLoad(false);
+            setInfoList([]);
+        });
+    }
+
     useEffect(()=> {
+        setInfoList([]);
+        setLoad(false);
         navigation.setParams({});
         getInfos();
+        listData();
     }, []);
 
     return (
@@ -174,16 +171,25 @@ export default function HomeScreen({ navigation, route }) {
                     </MainInfoTitle>
                     <MainInfoList>
                         {
-                            mainInfos.map((item, index) => (
-                                <InfoButton
-                                    key={item.id + index}
-                                    keyItem={item.id + index}
-                                    even={index%2 === 0}
-                                    title={item.title}
-                                    description={item.description}
-                                    onclick={()=>{}}
-                                />
-                            ))
+                            isLoading ? (
+                                <View style={{ width: '100%', alignItems: 'center', marginTop: 15 }}>
+                                    <ActivityIndicator color="#1B2431" size="large" />
+                                </View>
+                            ) : (
+                                infoList.map((item, index) => (
+                                    <InfoButton
+                                        key={item._id + index}
+                                        keyItem={item._id + index}
+                                        even={index%2 === 0}
+                                        title={item.title}
+                                        description={item.shortDescript}
+                                        onclick={()=>navigation.navigate('InfoDetail', {
+                                            info: item._id,
+                                            from: 'Home'
+                                        })}
+                                    />
+                                ))
+                            )
                         }
                     </MainInfoList>
                 </MainView>

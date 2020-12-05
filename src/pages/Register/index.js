@@ -134,12 +134,13 @@ export default function RegisterScreen({ navigation, route }) {
                         Preencha os campos abaixo para proseguir para o app.
                     </Descript>
                     <Input
-                        placeholder={'Digite seu nome'}
+                        placeholder={'Digite como você quer ser chamado'}
                         onchange={({nativeEvent: {text}})=>setName(text)}
                         value={name}
                         hasValue={true}
                         customStyle={{ marginTop: 24 }}
                         maxLength={75}
+                        textContentType={'name'}
                     />
                     <View style={{ position: 'relative' }}>
                         <Input

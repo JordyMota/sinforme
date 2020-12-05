@@ -42,3 +42,13 @@ export const FirstArt = styled.View`
 export const SecondtArt = styled(FirstArt)`
     background-color: #75B3E7;
 `;
+
+export const TextError = styled.Text`
+    font-size: 17;
+    font-weight: bold;
+    color: #f73d43;
+    width: 90%;
+    max-width: 90%;
+    margin: 0 5%;
+    text-align: center;
+`;

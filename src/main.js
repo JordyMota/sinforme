@@ -11,6 +11,8 @@ import AppInfo from './pages/AppInfo';
 import RegisterInfo from './pages/RegisterInfo';
 import Terms from './pages/Terms';
 import Register from './pages/Register';
+import InfoDetail from './pages/InfoDetail';
+import SuccessPage from './pages/SuccessPage';
 
 export default function Main() {
     const Stack = createStackNavigator();
@@ -66,9 +68,18 @@ export default function Main() {
                             component={AppInfo}
                             initialParams={{ logout: ()=>setFirstLogin(true) }}
                         />
+                        <Stack.Screen
+                            name="InfoDetail"
+                            component={InfoDetail}
+                            initialParams={{ logout: ()=>setFirstLogin(true) }}
+                        />
                         </>
                     )
                 }
+                <Stack.Screen
+                    name="SuccessPage"
+                    component={SuccessPage}
+                />
                 <Stack.Screen
                     name="Help"
                     component={Help}

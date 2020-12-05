@@ -4,7 +4,11 @@ import { InputContainer, InputItem } from './styles';
 import InsetShadow from 'react-native-inset-shadow';
 
 export default function Input(props) {
-    const { customStyle={}, inputStyle={}, onchange=(evn)=>{}, placeholder='', multiline=false, numberOfLines=5, maxLength, value, hasValue=null, editable=true } = props;
+    const {
+        customStyle={}, inputStyle={}, onchange=(evn)=>{}, placeholder='',
+        multiline=false, numberOfLines=5, maxLength, value, hasValue=null,
+        editable=true, textContentType='none'
+    } = props;
     return (
         <InputContainer
             multiline={multiline}
@@ -21,6 +25,7 @@ export default function Input(props) {
                     {...(maxLength ? {maxLength} : {})}
                     {...(hasValue ? {value} : {})}
                     editable={editable}
+                    textContentType={textContentType}
 
                 />
             </InsetShadow>
