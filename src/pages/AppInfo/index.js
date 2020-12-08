@@ -92,6 +92,7 @@ export default function AppInfo({ navigation, route }) {
                                 <View>
                                     <Text
                                         style={{ fontSize: 18, color: '#000', fontWeight: 'bold' }}
+                                        allowFontScaling={true}
                                     >
                                         Preciso de ajuda
                                     </Text>
@@ -116,6 +117,7 @@ export default function AppInfo({ navigation, route }) {
                                 <View>
                                     <Text
                                         style={{ fontSize: 18, color: '#f73d43', fontWeight: 'bold' }}
+                                        allowFontScaling={true}
                                     >
                                         Sair do app
                                     </Text>
@@ -148,7 +150,9 @@ export default function AppInfo({ navigation, route }) {
                                     fontWeight: 'bold',
                                     color: '#000',
                                     marginTop: (height <= 593) ? 5 : 8
-                                }}>
+                                }}
+                                allowFontScaling={true}
+                            >
                                 Versão {appJson.expo.version}
                             </Text>
                         ) : <></>

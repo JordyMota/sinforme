@@ -78,10 +78,10 @@ export default function HelpScreen({ navigation, route }) {
                             right: ((width/100)*38)*(-1)
                         }}
                     />
-                    <Title style={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 30 }}>
+                    <Title style={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 30 }} allowFontScaling={true}>
                         Precisa de ajuda?{"\n"}Fale com a gente!
                     </Title>
-                    <Descript>
+                    <Descript allowFontScaling={true}>
                         Tem dúvida da utilização do app? Tem alguma sugestão? Viu algum erro? Ou qualquer outra coisa que queira falar. É só preencher as informações abaixo, enviar e aguardar que a gente entra em contato com você.
                     </Descript>
                     <Input

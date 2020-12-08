@@ -16,7 +16,7 @@ export default function SuccessPageScreen({ navigation, route }) {
                 }}
                 resizeMode="cover"
             />
-            <Title>
+            <Title allowFontScaling={true}>
                 {text}
             </Title>
             <Button

@@ -65,10 +65,10 @@ export default function RegisterInfoScreen({ navigation, route }) {
                         dark={true}
                         customStyle={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10 }}
                     />
-                    <Title>
+                    <Title allowFontScaling={true}>
                         Mas antes bora{"\n"}conversar um pouco
                     </Title>
-                    <Descript>
+                    <Descript allowFontScaling={true}>
                         A gente vai pedir algumas informações sua, e vamos usar essas informações pra colocar você em um grupo, e como muitos outros apps fazem e nem te falam queremos vender para outras empresas coisas que esse grupo gosta, mas relaxa que não vamos divulgar nenhuma informação sensivel, como seu nome ou seus documentos. Não cobramos nada de você, e não vamos te obrigar a passar suas informações, então se não se sentir a vontade em liberar esses dados pra gente só clicar no botão "Continuar sem dados", e usar o app normalmente.
                     </Descript>
                     <Button

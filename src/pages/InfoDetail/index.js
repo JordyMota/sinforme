@@ -85,17 +85,17 @@ export default function InfoDetailScreen({ navigation, route }) {
                         ) : (
                             !infoDetail?._id ? (
                                 <View style={{ width: '100%', alignItems: 'center' }}>
-                                    <NoResult>
+                                    <NoResult allowFontScaling={true}>
                                         Não foi possível exibir os dados dessa informação. Por favor, tente novamente mais tarde!
                                     </NoResult>
                                 </View>
                             ) : (
                                 <>
-                                <Title>
+                                <Title allowFontScaling={true}>
                                     {infoDetail.title}
                                 </Title>
                                 <DescriptContainer onPress={()=>setShowMore(!showMore)} unlimited={showMore}>
-                                    <Descript>
+                                    <Descript allowFontScaling={true}>
                                         {infoDetail.descript}
                                     </Descript>
                                     <ShowMoreButton>
@@ -107,7 +107,7 @@ export default function InfoDetailScreen({ navigation, route }) {
                                 {
                                     infoDetail?.steps?.length ? (
                                         <>
-                                        <GroupTitle>
+                                        <GroupTitle allowFontScaling={true}>
                                             Passo a Passo
                                         </GroupTitle>
                                         <View>
@@ -128,10 +128,10 @@ export default function InfoDetailScreen({ navigation, route }) {
                                 {
                                     infoDetail?.images?.length ? (
                                         <>
-                                        <GroupTitle>
+                                        <GroupTitle allowFontScaling={true}>
                                             Imagens
                                         </GroupTitle>
-                                        <GroupSubtitle>
+                                        <GroupSubtitle allowFontScaling={true}>
                                             Clique em uma imagem para visualiza-la
                                         </GroupSubtitle>
                                         {
@@ -154,7 +154,7 @@ export default function InfoDetailScreen({ navigation, route }) {
                                 {
                                     infoDetail?.links?.length ? (
                                         <>
-                                        <GroupTitle>
+                                        <GroupTitle allowFontScaling={true}>
                                             Informações que podem te interessar
                                         </GroupTitle>
                                         <MainInfoList>

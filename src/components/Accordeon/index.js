@@ -34,7 +34,7 @@ export default function ButtonDf(props) {
                 />
             </Header>
             <Body>
-                <Descript>
+                <Descript allowFontScaling={true}>
                     {descript}
                 </Descript>
             </Body>

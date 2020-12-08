@@ -127,10 +127,10 @@ export default function RegisterScreen({ navigation, route }) {
                         dark={true}
                         customStyle={{ marginTop: (Constants?.statusBarHeight ? Constants.statusBarHeight : 14) + 10 }}
                     />
-                    <Title>
+                    <Title allowFontScaling={true}>
                         So preencher e já foi
                     </Title>
-                    <Descript>
+                    <Descript allowFontScaling={true}>
                         Preencha os campos abaixo para proseguir para o app.
                     </Descript>
                     <Input

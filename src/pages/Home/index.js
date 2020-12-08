@@ -166,7 +166,7 @@ export default function HomeScreen({ navigation, route }) {
                             source={iconSearch}
                         />
                     </FullSearchButton>
-                    <MainInfoTitle>
+                    <MainInfoTitle allowFontScaling={true}>
                         Informações populares
                     </MainInfoTitle>
                     <MainInfoList>

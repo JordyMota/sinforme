@@ -40,6 +40,7 @@ export default function InfoButton(props) {
                     fontWeight: 'bold',
                     ...titleStyle
                 }}
+                allowFontScaling={true}
             >
                 { title }
             </Text>
